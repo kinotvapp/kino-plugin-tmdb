@@ -1,10 +1,10 @@
 {
   "id": "tmdb",
   "name": "TMDB",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "apiVersion": 7,
   "entry": "plugin.js",
-  "description": "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato con tu propia llave.",
+  "description": "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.",
   "author": "kinotvapp",
   "homepage": "https://github.com/kinotvapp/kino-plugin-tmdb",
   "hosts": ["image.tmdb.org"],
@@ -14,7 +14,7 @@
   "section": { "label": "TMDB" },
   "theme": { "accent": "#01B4E4", "onAccent": "#0D253F", "background": "#0D253F", "surface": "#173A5C", "highlight": "#90CEA1" },
   "settings": [
-    { "key": "llave", "label": "Tu llave de TMDB", "type": "section", "hint": "Este plugin usa tu propia llave de TMDB, que es gratis: ponla en Ajustes ▸ «Tu llave de TMDB», o instala un addon de TMDB de Stremio configurado con tu llave. El plugin nunca la ve. This product uses the TMDB API but is not endorsed or certified by TMDB." },
+    { "key": "llave", "label": "Tu llave de TMDB", "type": "section", "hint": "Kino pone la conexión con TMDB: no necesitas nada más. Si quieres, pon tu propia llave en Ajustes ▸ «Tu llave de TMDB» como respaldo. This product uses the TMDB API but is not endorsed or certified by TMDB." },
     { "key": "estado", "label": "Estado", "type": "status" },
     { "key": "preferencias", "label": "Idioma y país", "type": "section", "hint": "Por defecto siguen el idioma y el país de tu aparato. El país decide los estrenos en cines y lo que viene pronto." },
     { "key": "idioma", "label": "Idioma del catálogo", "type": "select", "default": "auto",

@@ -1,7 +1,7 @@
 # TMDB para Kino
 
 Catálogo e información de películas y series de [TMDB](https://www.themoviedb.org) para Kino, directo desde tu
-aparato con tu propia llave.
+aparato.
 
 > This product uses the TMDB API but is not endorsed or certified by TMDB.
 >
@@ -26,25 +26,29 @@ aparato con tu propia llave.
 El idioma sigue el de tu aparato (español de España, español latinoamericano o inglés) y el país decide los
 estrenos en cines; los dos se pueden cambiar en la pestaña TMDB de Ajustes. Nunca muestra contenido para adultos.
 
-## Necesitas tu propia llave de TMDB (es gratis)
+## La conexión con TMDB
 
-1. Crea una cuenta en [themoviedb.org](https://www.themoviedb.org/signup).
-2. En tu cuenta, entra a **Configuración ▸ API** y pide una llave para uso personal.
-3. Copia la «Clave de la API» (32 caracteres) o el «Token de acceso de lectura».
-4. En Kino, ponla en **Ajustes ▸ «Tu llave de TMDB»**.
+No necesitas hacer nada: el plugin funciona apenas lo instalas.
 
-Si ya usas un addon de TMDB de Stremio configurado con tu llave, Kino puede usar esa misma llave: te lo pregunta
-una vez.
+1. **Primero, la conexión de Kino.** Kino trae su propia llave de TMDB y guarda las respuestas en una caché
+   compartida, así que no tienes que crear ninguna cuenta.
+2. **Tu llave, como respaldo (opcional).** Si la conexión de Kino falla o llega a su límite, Kino usa tu propia
+   llave, si pusiste una en **Ajustes ▸ «Tu llave de TMDB»** (o la de un addon de TMDB de Stremio que aprobaste).
 
-Sin llave, el plugin no muestra filas y te dice dónde ponerla. La pestaña TMDB de Ajustes muestra si tu llave
-funciona.
+Para tener tu llave de respaldo (es gratis): crea una cuenta en
+[themoviedb.org](https://www.themoviedb.org/signup), entra a **Configuración ▸ API**, pide una llave para uso
+personal y copia la «Clave de la API» (32 caracteres) o el «Token de acceso de lectura» en Ajustes ▸ «Tu llave de
+TMDB».
+
+Solo si la app no tiene ninguna conexión con TMDB, el plugin no muestra filas y te dice dónde poner tu llave. La
+pestaña TMDB de Ajustes muestra si la conexión funciona.
 
 ## Privacidad
 
 - **Solo habla con TMDB, y desde tu aparato.** No hay ningún servidor intermedio: Kino hace cada consulta a
-  `api.themoviedb.org` con tu llave, y las imágenes llegan de `image.tmdb.org`.
-- **El plugin nunca ve tu llave.** Kino la guarda y la agrega a cada consulta; el código del plugin solo pide
-  rutas de TMDB (`kino.tmdb`) y recibe las respuestas.
+  `api.themoviedb.org`, y las imágenes llegan de `image.tmdb.org`.
+- **El plugin nunca ve ninguna llave**, ni la de Kino ni la tuya. Kino las guarda y agrega la que toque a cada
+  consulta; el código del plugin solo pide rutas de TMDB (`kino.tmdb`) y recibe las respuestas.
 - Guarda en el aparato una copia corta de las listas (unos minutos, para no repetir consultas y para mostrar algo
   si TMDB falla un rato). No guarda nada tuyo ni lo envía a ningún otro lado.
 

@@ -1,6 +1,7 @@
 // TMDB for Kino: a catalog and metadata plugin built only on kino.tmdb (Kino 0.9.53+), which reaches
-// api.themoviedb.org/3 with the PERSON'S own TMDB key. This file never sees, stores or sends a key, and
-// never talks to TMDB's API itself: Kino does. Images are plain image.tmdb.org URLs Kino loads to show.
+// api.themoviedb.org/3 with Kino's own app key behind a shared cache, falling back to the person's own key (Settings)
+// when that one fails or hits its limit. This file never sees, stores or sends a key, and never talks to TMDB's API
+// itself: Kino does. Images are plain image.tmdb.org URLs Kino loads to show.
 //
 // This product uses the TMDB API but is not endorsed or certified by TMDB.
 
@@ -51,8 +52,8 @@ const TEXT = {
     tabFeatured: "Destacado", tabMovies: "Películas", tabSeries: "Series",
     newerApp: "Este plugin necesita una versión más nueva de la app: actualízala para ver el catálogo de TMDB.",
     noPlay: "TMDB solo muestra el catálogo y la información: busca este título en tus otras fuentes para verlo.",
-    ready: (l, r) => `Lista: TMDB responde con tu llave. Catálogo en ${l}${r ? ", país " + r : ""}.`,
-    noKey: "Falta tu llave: agrégala en Ajustes ▸ «Tu llave de TMDB», o instala un addon de TMDB de Stremio configurado con tu llave.",
+    ready: (l, r) => `Conectado a TMDB. Catálogo en ${l}${r ? ", país " + r : ""}.`,
+    noKey: "Esta app no tiene conexión con TMDB: agrega tu llave en Ajustes ▸ «Tu llave de TMDB».",
     statusNewer: "Tu versión de la app no trae TMDB para plugins: actualízala.",
     down: "TMDB no respondió ahora; intenta en unos minutos.",
     season: (n) => `Temporada ${n}`,
@@ -66,8 +67,8 @@ const TEXT = {
     tabFeatured: "Featured", tabMovies: "Movies", tabSeries: "Series",
     newerApp: "This plugin needs a newer version of the app: update it to see the TMDB catalog.",
     noPlay: "TMDB only shows the catalog and the details: look this title up in your other sources to watch it.",
-    ready: (l, r) => `Ready: TMDB answers with your key. Catalog in ${l}${r ? ", country " + r : ""}.`,
-    noKey: "Your key is missing: add it in Settings ▸ «Your TMDB key», or install a Stremio TMDB addon set up with your key.",
+    ready: (l, r) => `Connected to TMDB. Catalog in ${l}${r ? ", country " + r : ""}.`,
+    noKey: "This app has no TMDB connection: add your key in Settings ▸ «Your TMDB key».",
     statusNewer: "Your version of the app has no TMDB for plugins: update it.",
     down: "TMDB did not answer now; try again in a few minutes.",
     season: (n) => `Season ${n}`,
@@ -328,7 +329,7 @@ const HOME = [
 ];
 
 /**
- * Rows for the keys, in order. The first list is asked alone so a person without a key costs one call; a list that
+ * Rows for the keys, in order. The first list is asked alone so an app without any TMDB key costs one call; a list that
  * fails is left out; when none answers, the first failure is thrown (Kino shows its reason under the row).
  */
 async function rows(keys) {
@@ -685,7 +686,7 @@ export async function meta(query) {
     }
     return Object.keys(answer).length ? answer : null;
   } catch (e) {
-    // A meta failure is never shown; no key, a title TMDB lacks or a slow TMDB are just "no answer".
+    // A meta failure is never shown; no TMDB key at all, a title TMDB lacks or a slow TMDB are just "no answer".
     kino.log("meta: no answer", e && e.code);
     return null;
   }

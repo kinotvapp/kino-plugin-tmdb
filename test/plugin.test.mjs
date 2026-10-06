@@ -78,6 +78,16 @@ test("the manifest passes the kit: id, name, apiVersion 7, the image host, no re
   assert.ok(manifest.settings[0].hint.includes("This product uses the TMDB API but is not endorsed or certified by TMDB."));
 });
 
+test("the manifest no longer asks for the person's key: Kino's connection first, the person's key only as a backup", () => {
+  assert.equal(manifest.version, "1.1.0");
+  assert.equal(manifest.description, "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.");
+  const hint = manifest.settings[0].hint;
+  assert.match(hint, /^Kino pone la conexión con TMDB/);
+  assert.match(hint, /Ajustes ▸ «Tu llave de TMDB» como respaldo/);
+  assert.ok(!/tu propia llave de TMDB, que es gratis|addon de TMDB de Stremio/.test(hint));
+  assert.ok(!/propia llave/.test(manifest.description));
+});
+
 for (const args of [["home"], ["browse", "l:pop-movie"], ["browse", "l:pop-movie", "2"], ["browse", "l:g:movie:28"], ["search", "keanu"],
   ["episodes", "tv:1399"], ["meta", "tt0133093"], ["meta", "tt0944947", "series"], ["meta", "tmdb:1399", "series"], ["categories"],
   ["section"], ["section", "peliculas"], ["section", "series"], ["settingsStatus"]]) {
@@ -167,10 +177,18 @@ test("no key: home and search throw Kino's own no_tmdb_key after a single call; 
   assert.equal(await plugin.meta({ type: "movie", ids: { imdb: "tt0133093" }, lang: "es" }), null);
 });
 
-test("no key: the settings tab says where the key goes; categories still list their tiles", async () => {
+test("settings tab: connected when kino.tmdb answers, in Spanish and English", async () => {
+  setup();
+  assert.match((await plugin.settingsStatus()).estado, /^Conectado a TMDB\. Catálogo en es-MX, país CO\.$/);
+  setup({ lang: "en-US" });
+  assert.match((await plugin.settingsStatus()).estado, /^Connected to TMDB\. Catalog in en-US, country US\.$/);
+});
+
+test("no key at all: the settings tab says the app has no TMDB connection and where the key goes; categories still list their tiles", async () => {
   setup({ tmdb: () => { throw noTmdbKeyError("es-CO"); } });
   const status = await plugin.settingsStatus();
-  assert.match(status.estado, /Ajustes ▸ «Tu llave de TMDB»/);
+  assert.equal(status.estado, "Esta app no tiene conexión con TMDB: agrega tu llave en Ajustes ▸ «Tu llave de TMDB».");
+  assert.ok(!/kino/i.test(status.estado));
   assert.ok(status.estado.length <= 200);
   const tiles = kept("categories", await plugin.categories());
   assert.equal(tiles.length, 24);
