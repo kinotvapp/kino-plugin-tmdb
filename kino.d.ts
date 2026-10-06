@@ -363,7 +363,7 @@ interface KinoCategory {
   adult?: boolean;
 }
 
-/** Your module's exports. `resolve` is required, and at least one of `search`/`home`. */
+/** Your module's exports. `resolve` is required, and at least one of `search`/`home` (a catalog-only plugin: see [KinoCatalogOnlyPlugin]). */
 interface KinoPlugin {
   /** apiVersion 6, capability "migrate". Return null for anything that is not yours. 10 s per call. */
   migrate?(input: KinoMigrateInput): Promise<KinoMigrateAnswer | null>;
@@ -504,8 +504,25 @@ interface KinoTracker { track: KinoTrackFn; subtitles?: KinoSubtitlesFn; segment
 /** A segment source: capabilities only "segments" (and maybe "subtitles" or "tracking"). */
 interface KinoSegmentSource { segments: KinoSegmentsFn; subtitles?: KinoSubtitlesFn; track?: KinoTrackFn }
 
+/**
+ * Kino 0.9.54, `"catalogOnly": true` in kino-plugin.json (additive: no new apiVersion, an older Kino ignores the field): a
+ * catalog that lists and describes titles and plays none. Kino sends its titles to the person's other sources ("Buscar
+ * dónde verlo"), never lists it as a source of a title and never calls its `resolve`. Needs one of `home`, `browse`,
+ * `search`, `meta`; refuses `download`, `drm`, `channels`, `streamHosts` and `"browser": true` (`"pages"` is fine). To install
+ * on Kino 0.9.53 and older too, keep declaring and exporting `resolve` (throw `kino.error("not_found", …, { userMessage })`)
+ * and declare `search` or `home`: those apps ignore the field and require both.
+ */
+interface KinoCatalogOnlyPlugin extends Omit<KinoPlugin, "resolve" | "sign" | "liveCategories" | "liveChannels" | "liveSearch" | "guide"> {
+  /** Only for Kino 0.9.53 and older (which require it): never called from Kino 0.9.54 on. */
+  resolve?: KinoPlugin["resolve"];
+  subtitles?: KinoSubtitlesFn;
+  track?: KinoTrackFn;
+  segments?: KinoSegmentsFn;
+  meta?: KinoMetaFn;
+}
+
 /** Your module's exports: one of these. */
-type KinoPluginModule = KinoPlayingPlugin | KinoSubtitleProvider | KinoTracker | KinoSegmentSource;
+type KinoPluginModule = KinoPlayingPlugin | KinoCatalogOnlyPlugin | KinoSubtitleProvider | KinoTracker | KinoSegmentSource;
 
 // ---------- the kino API ----------
 
@@ -734,14 +751,19 @@ declare namespace kino {
 
   /**
    * Kino 0.9.53 (no new apiVersion: check `typeof kino.tmdb === "function"` first). A GET to TMDB's v3 API
-   * (`https://api.themoviedb.org/3` + `path`) with the PERSON'S OWN TMDB key, never Kino's: the one they typed in
-   * Ajustes ("Tu llave de TMDB"), else the one they configured in an installed Stremio addon (once they agree). Your
-   * plugin never sees the key and needs no `hosts` entry for TMDB. `path` starts with /discover, /trending, /search,
-   * /movie, /tv, /find, /genre, /configuration, /person or /collection, without the version and without a query string;
-   * `params` (at most 20; never `api_key` or a session) become the query. Answers the parsed JSON body. At most 40 calls
-   * per 10 s per plugin; bodies up to 2 MiB; cached 10 min by path and params. Throws `no_tmdb_key` (no key, or TMDB
-   * refused it: `e.userMessage` is Kino's sentence telling the person what to do), `invalid_request`, `rate_limited`,
-   * `not_found`, `too_large`, `timeout`, `network`, `unavailable`, `not_allowed` (from `sign()`).
+   * (`https://api.themoviedb.org/3` + `path`) with no key in your plugin. Kino's own TMDB key goes first, behind Kino's
+   * TMDB cache, a shared in-flight request and its own limits (at most 20 calls per 10 s per plugin and 60 per 10 s for
+   * all plugins on Kino's key). Only when Kino's key fails (TMDB answers 401/403/429 for it, or one of those limits is
+   * spent) does the same request go again with the PERSON'S key: the one they typed in Ajustes ("Tu llave de TMDB",
+   * optional), else the one they configured in an installed Stremio addon (once they agree). With neither, a cached copy
+   * up to 7 days old, else `rate_limited`. A key your plugin keeps in its own settings is never used. Your plugin never
+   * sees any key and needs no `hosts` entry for TMDB. `path` starts with /discover, /trending, /search, /movie, /tv,
+   * /find, /genre, /configuration, /person or /collection, without the version and without a query string; `params` (at
+   * most 20; never `api_key` or a session) become the query. Answers the parsed JSON body (a cached copy when TMDB is down
+   * or unreachable). At most 40 calls per 10 s per plugin whichever key; bodies up to 2 MiB; cached 10 min in memory by
+   * path and params, and on disk with Kino's TMDB cache. Throws `no_tmdb_key` (only on a Kino build without a key of its
+   * own and a person without one: `e.userMessage` is Kino's sentence telling the person what to do), `invalid_request`,
+   * `rate_limited`, `not_found`, `too_large`, `timeout`, `network`, `unavailable`, `not_allowed` (from `sign()`).
    */
   function tmdb(path: string, params?: Record<string, string | number | boolean>): Promise<any>;
 

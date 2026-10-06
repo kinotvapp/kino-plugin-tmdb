@@ -569,6 +569,9 @@ function seriesInfo(d) {
   return info;
 }
 
+// "catalogOnly": true in kino-plugin.json: Kino 0.9.54 and later never call this (they send the person to their other
+// sources first). Kino 0.9.53 ignores that field and requires resolve, so it stays, saying in the person's words why
+// nothing plays.
 export async function resolve() {
   await null;
   throw kino.error("not_found", "TMDB is a catalog: it has no streams", { userMessage: t().noPlay });

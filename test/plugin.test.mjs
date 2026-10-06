@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { validate } from "../sdk/validate.mjs";
-import { checkOutput, validateManifest } from "../sdk/contract.mjs";
+import { checkOutput, contract, requiredExports, validateManifest } from "../sdk/contract.mjs";
 import { createKino, kinoError, kinoTmdbRequest, noTmdbKeyError } from "../sdk/kino-shim.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -79,7 +79,7 @@ test("the manifest passes the kit: id, name, apiVersion 7, the image host, no re
 });
 
 test("the manifest no longer asks for the person's key: Kino's connection first, the person's key only as a backup", () => {
-  assert.equal(manifest.version, "1.1.0");
+  assert.equal(manifest.version, "1.2.0");
   assert.equal(manifest.description, "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.");
   const hint = manifest.settings[0].hint;
   assert.match(hint, /^Kino pone la conexión con TMDB/);
@@ -431,6 +431,25 @@ test("section: three tabs, a hero, rows per tab; an unknown tab reads as the fir
   assert.equal(s.hero.title, "Matrix");
   assert.equal((await plugin.section({ tab: "series" })).rows[0].id, "pop-tv");
   assert.equal((await plugin.section({ tab: "__proto__" })).tab, "inicio");
+});
+
+test("catalogOnly (Kino 0.9.54): a catalog, still installable on Kino 0.9.53, which ignores the field", async () => {
+  assert.equal(manifest.catalogOnly, true);
+  // Kino 0.9.53 requires resolve and search or home: both stay declared, and resolve stays exported.
+  for (const c of contract.capabilities.required) assert.ok(manifest.capabilities.includes(c), c);
+  assert.ok(contract.capabilities.atLeastOneOf.some((c) => manifest.capabilities.includes(c)));
+  assert.ok(requiredExports(manifest.capabilities, manifest.settings, manifest).includes("resolve"));
+  assert.equal(typeof plugin.resolve, "function");
+  // The same manifest read as Kino 0.9.53 reads it (the field dropped) is valid and asks for the same capabilities.
+  const raw = JSON.parse(readFileSync(join(root, "kino-plugin.json"), "utf8"));
+  delete raw.catalogOnly;
+  const older = validateManifest(JSON.stringify(raw));
+  assert.equal(older.ok, true);
+  assert.deepEqual(older.manifest.capabilities, manifest.capabilities);
+  const r = await validate(root);
+  assert.deepEqual(r.problems, []);
+  assert.deepEqual(r.consent, [{ text: contract.manifest.catalogOnly.consentLine.es, danger: false }]);
+  assert.ok(r.notes.some((n) => n.startsWith("catalogOnly existe desde Kino 0.9.54: un Kino anterior ignora el campo y lo instala")), r.notes.join("\n"));
 });
 
 test("resolve: a catalog has no streams, and says so in the person's words", async () => {

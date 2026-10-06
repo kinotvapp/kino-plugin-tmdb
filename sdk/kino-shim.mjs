@@ -655,7 +655,7 @@ export function kinoTmdbRequest(path, params) {
 }
 
 /** The `no_tmdb_key` error, with the app's sentence for the person in [lang] (Spanish for "es…", else English). */
-export function noTmdbKeyError(lang, message = "no hay una llave de TMDB de la persona") {
+export function noTmdbKeyError(lang, message = "no TMDB key: neither Kino's nor the person's") {
   const words = contract.kinoTmdb.noKeyUserMessage;
   return kinoError(contract.kinoTmdb.noKeyCode, message, { userMessage: String(lang || "").toLowerCase().startsWith("es") ? words.es : words.en });
 }
@@ -665,8 +665,8 @@ const readJsonFile = (file, what) => {
 };
 
 /**
- * The person's TMDB key as the kit knows it: [explicit], else KINO_TMDB_KEY, else `tmdbKey` in sdk/config.json (next to
- * this file, or ./sdk/config.json from where you run). Null when none. Never printed.
+ * The kit's TMDB key, standing in for Kino's own: [explicit], else KINO_TMDB_KEY, else `tmdbKey` in sdk/config.json (next
+ * to this file, or ./sdk/config.json from where you run). Null when none. Never printed.
  */
 export function kitTmdbKey(explicit, env = process.env) {
   if (typeof explicit === "string" && explicit.trim()) return explicit.trim();
@@ -690,7 +690,7 @@ export function kitTmdbKey(explicit, env = process.env) {
  * kino.meta / kino.tmdb (Kino 0.9.53): [metaFixture] (an object, or a file path; default env KINO_META_FIXTURE) answers
  * kino.meta offline -- keys `"<type>:<idKey>:<value>"` or `"<idKey>:<value>"` (`"movie:imdb:tt0133093"`, `"tmdb:603"`) --
  * and without it kino.meta answers null (the kit has no TMDB/AniList of Kino's own and no other plugins). [tmdbKey]
- * (default [kitTmdbKey]) is the person's TMDB key; [tmdbFixture] (an object or a file; default env KINO_TMDB_FIXTURE)
+ * (default [kitTmdbKey]) stands in for Kino's own TMDB key; [tmdbFixture] (an object or a file; default env KINO_TMDB_FIXTURE)
  * answers kino.tmdb offline, keyed `"<path>?<sorted query>"` or `"<path>"`, standing in for TMDB and a configured key.
  * [now] is the clock of their rate limits and cache.
  */
@@ -1154,10 +1154,13 @@ export function createKino(manifest, { appVersion = "sdk", lang = "es-CO", stora
     return null;
   }
 
-  // --- kino.tmdb (Kino 0.9.53): TMDB with the PERSON's own key, never Kino's. The kit's key: [tmdbKey], KINO_TMDB_KEY or
-  // sdk/config.json's tmdbKey; a fixture stands in for TMDB (and a configured key). ---
+  // --- kino.tmdb (Kino 0.9.53): the app asks TMDB on Kino's own key first (its limits: kinoKeyPerWindow per plugin,
+  // kinoKeyGlobalPerWindow for all) and on the person's key only when Kino's fails. The kit has neither: your key ([tmdbKey],
+  // KINO_TMDB_KEY or sdk/config.json's tmdbKey) stands in for Kino's, under Kino's stricter limit, with no person's key to
+  // fall back to; a fixture stands in for TMDB (and a key). ---
   const T = contract.kinoTmdb;
   const tmdbBucket = tokenBucket(T.perWindow, T.windowMs, now);
+  const kinoKeyBucket = tokenBucket(T.kinoKeyPerWindow, T.windowMs, now);
   const personKey = tmdbKey === undefined ? kitTmdbKey(undefined, env) : tmdbKey;
   const tmdbFixtureFile = tmdbFixture === undefined ? env.KINO_TMDB_FIXTURE : tmdbFixture;
   const tmdbAnswers = typeof tmdbFixtureFile === "string" && tmdbFixtureFile ? readJsonFile(tmdbFixtureFile, "KINO_TMDB_FIXTURE") : plainObject(tmdbFixtureFile) ? tmdbFixtureFile : null;
@@ -1179,6 +1182,7 @@ export function createKino(manifest, { appVersion = "sdk", lang = "es-CO", stora
     if (!v3 && !v4) throw noTmdbKeyError(lang);
     const cached = tmdbCache.get(cacheKey);
     if (cached && now() - cached.at < T.cacheTtlMs) return JSON.parse(cached.text);
+    if (!kinoKeyBucket.take()) throw kinoError("rate_limited", `too many kino.tmdb calls on Kino's key (at most ${T.kinoKeyPerWindow} every ${T.windowMs / 1000} s); in Kino the person's key, if any, would answer`);
     const qs = [query, v3 ? "api_key=" + encodeURIComponent(personKey) : ""].filter(Boolean).join("&");
     const url = T.base + p + (qs ? "?" + qs : "");
     const headers = { Accept: "application/json", "User-Agent": `Kino/${appVersion}` };
@@ -1196,7 +1200,8 @@ export function createKino(manifest, { appVersion = "sdk", lang = "es-CO", stora
       clearTimeout(timer);
     }
     if (bytes.length > T.maxBodyBytes) throw kinoError("too_large", `la respuesta de TMDB pasa de ${kb(T.maxBodyBytes)}`);
-    if (r.status === 401) throw noTmdbKeyError(lang, "TMDB rechazó la llave de la persona");
+    // In Kino a refused or rate-limited Kino key goes again on the person's key; the kit has none to try.
+    if (r.status === 401 || r.status === 403) throw kinoError("unavailable", `TMDB refused the key (${r.status}): check KINO_TMDB_KEY`);
     if (r.status === 404) throw kinoError("not_found", "TMDB no tiene " + p.slice(0, 200));
     if (r.status === 429) throw kinoError("rate_limited", "TMDB pidió esperar (429)");
     if (r.status < 200 || r.status > 299) throw kinoError("unavailable", "TMDB respondió " + r.status);
@@ -1280,7 +1285,7 @@ export function createKino(manifest, { appVersion = "sdk", lang = "es-CO", stora
     },
     error: (code, message, options) => kinoError(code, message, options),
     log: kinoLog,
-    // Kino 0.9.53 (no new apiVersion): ask Kino about a title, and TMDB with the person's own key.
+    // Kino 0.9.53 (no new apiVersion): ask Kino about a title, and TMDB with no key in the plugin (Kino's, else the person's).
     meta,
     tmdb,
     // apiVersion 6: the app opens a hidden WebView; Node has none, so the kit answers as a device without one would.

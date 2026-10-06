@@ -1,7 +1,7 @@
 {
   "id": "tmdb",
   "name": "TMDB",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "apiVersion": 7,
   "entry": "plugin.js",
   "description": "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.",
@@ -9,6 +9,7 @@
   "homepage": "https://github.com/kinotvapp/kino-plugin-tmdb",
   "hosts": ["image.tmdb.org"],
   "capabilities": ["search", "home", "browse", "episodes", "resolve", "meta"],
+  "catalogOnly": true,
   "categories": ["movies", "series", "utilities"],
   "discoverable": true,
   "section": { "label": "TMDB" },

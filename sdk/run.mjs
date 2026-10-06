@@ -45,8 +45,9 @@
 //   node sdk/run.mjs <plugin dir> meta '{"type":"series","ids":{"imdb":"tt0944947","tmdb":1399},"lang":"es"}'
 // kino.meta and kino.tmdb (Kino 0.9.53, any apiVersion) work in every function above, through the kit's stand-ins:
 //   KINO_META_FIXTURE=<file.json>   kino.meta answers from it ({ "movie:imdb:tt0133093": {...}, "tmdb:1399": {...} }); else null
-//   KINO_TMDB_KEY=<your key>        kino.tmdb asks TMDB with YOUR key (a v3 API key or a v4 read token); also "tmdbKey" in
-//                                   sdk/config.json. Without one: no_tmdb_key, exactly as a person without a key gets in Kino
+//   KINO_TMDB_KEY=<your key>        kino.tmdb asks TMDB with YOUR key where Kino uses its own (a v3 API key or a v4 read
+//                                   token), under Kino's limit for its key; also "tmdbKey" in sdk/config.json. Without one:
+//                                   no_tmdb_key, as a Kino build without a key of its own and a person without one gets
 //   KINO_TMDB_FIXTURE=<file.json>   kino.tmdb answers offline from it ({ "/movie/603?language=es-MX": {...}, "/genre/movie/list": {...} })
 //   (samples: docs/plugins/fixtures/kino-services/ in Kino's repository)
 // Options (before the plugin path):
@@ -92,6 +93,8 @@ const stderr = console.error.bind(console);
 
 /** What the app says when a `signing: "request"` Stream comes from a plugin without a sign() export. */
 export const NO_SIGN_EXPORT = "El plugin pide firmar el video pero no exporta sign()";
+/** run.mjs's note when a "catalogOnly" plugin's resolve (or sign) is run: only an older Kino ever calls it. */
+export const CATALOG_ONLY_RESOLVE_NOTE = contract.manifest.catalogOnly.resolveNote.replace("{fromApp}", contract.additiveFromApp.catalogOnly);
 
 /** The app's refusal of [value] (a checked resolve answer) from [plugin], or null. */
 export function signExportProblem(value, plugin) {
@@ -222,6 +225,8 @@ async function main() {
   const anyPlugin = contract.capabilities.anyPluginExports.includes(fn);
   if (fn === "meta" && !manifest.capabilities.includes("meta")) return fail(NO_META_CAPABILITY);
   if (!anyPlugin && !SETTINGS_FUNCTIONS.includes(fn) && fn !== "section" && fn !== "categories" && !manifest.capabilities.includes(capability)) return fail(`the manifest does not declare "${capability}" in capabilities`);
+  // "catalogOnly": true (Kino 0.9.54): Kino never calls resolve (nor sign); it still runs here, for the older Kino it serves.
+  if (manifest.catalogOnly && capability === "resolve") process.stderr.write(`· ${CATALOG_ONLY_RESOLVE_NOTE}\n`);
 
   const configFile = join(here, "config.json");
   const config = { ...(existsSync(configFile) ? JSON.parse(readFileSync(configFile, "utf8")) : {}), ...opts.config };

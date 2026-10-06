@@ -21,7 +21,9 @@ aparato.
 - **Información para los títulos de tus otras fuentes** (la capacidad `meta`): sinopsis, póster, fondo, logo,
   géneros, año, duración, calificación de TMDB, reparto y la lista de capítulos, buscados por su id de IMDb o de
   TMDB.
-- **No reproduce nada.** Es un catálogo: para ver un título, búscalo en tus otras fuentes.
+- **No reproduce nada.** Es un catálogo (`"catalogOnly": true`): desde Kino 0.9.54, al tocar un título Kino lo busca en
+  tus otras fuentes («Buscar dónde verlo») y nunca lo ofrece como fuente. En Kino 0.9.53, que no conoce ese campo, el
+  reproductor te dice que lo busques en tus otras fuentes.
 
 El idioma sigue el de tu aparato (español de España, español latinoamericano o inglés) y el país decide los
 estrenos en cines; los dos se pueden cambiar en la pestaña TMDB de Ajustes. Nunca muestra contenido para adultos.
@@ -54,13 +56,15 @@ pestaña TMDB de Ajustes muestra si la conexión funciona.
 
 ## Requisitos
 
-Kino 0.9.53 o más nueva (la que trae `kino.tmdb`). Las versiones 0.9.50 y anteriores no lo instalan («Este plugin
+Kino 0.9.53 o más nueva (la que trae `kino.tmdb`); desde Kino 0.9.54 sus títulos van directo a «Buscar dónde verlo». Las versiones 0.9.50 y anteriores no lo instalan («Este plugin
 necesita una versión más nueva de Kino»); en 0.9.51 y 0.9.52 se instala, pero te pide actualizar la app.
 
 ## Para desarrolladores
 
 - `plugin.js` es el plugin entero; `kino-plugin.json` su manifiesto. Solo usa `kino.tmdb(path, params)`, nunca
   `kino.fetch`, y declara `image.tmdb.org` como único host.
+- `"catalogOnly": true` (Kino 0.9.54) dice que es un catálogo. `resolve` sigue declarado y exportado solo para Kino
+  0.9.53, que ignora ese campo y lo exige; Kino 0.9.54 y posteriores nunca lo llaman.
 - `sdk/` es el kit de Kino para Node (`run.mjs`, `validate.mjs`), con `contract.json` y `kino.d.ts` al lado.
 - Pruebas, sin red ni llave (las respuestas de TMDB están en `test/fixtures/tmdb.json`, escritas a mano por
   `node test/make-fixtures.mjs`):

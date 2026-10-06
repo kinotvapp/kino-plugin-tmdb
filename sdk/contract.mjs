@@ -136,13 +136,24 @@ export function validateManifest(text, { knownPermissions = contract.permissions
   if (unknownCap !== undefined) return bad("capabilities", `Capacidad desconocida: "${unknownCap}"`);
   const tooNewCap = caps.find((c) => (contract.capabilities.apiVersions[c] ?? 1) > o.apiVersion);
   if (tooNewCap !== undefined) return bad("capabilities", `Esta capacidad necesita apiVersion ${contract.capabilities.apiVersions[tooNewCap]}`);
-  // Capabilities that play nothing, declared without any other (a subtitle provider, a tracker, or both): neither
-  // `required` nor `atLeastOneOf` applies.
-  const standalone = caps.length > 0 && caps.every((c) => contract.capabilities.standalone.includes(c));
-  const missingRequiredCap = contract.capabilities.required.find((c) => !caps.includes(c));
-  if (!standalone && missingRequiredCap !== undefined) return bad("capabilities", `El plugin debe declarar "${missingRequiredCap}"`);
-  if (!standalone && !contract.capabilities.atLeastOneOf.some((c) => caps.includes(c))) {
-    return bad("capabilities", `El plugin debe declarar "${contract.capabilities.atLeastOneOf.join('" o "')}"`);
+  // "catalogOnly": true (Kino 0.9.54, additive: valid at every apiVersion, ignored by older apps) lists titles and plays none:
+  // `resolve` is not required, one of its own atLeastOneOf is, and nothing that only serves playback may be declared.
+  const co = m.catalogOnly;
+  if (o.catalogOnly !== undefined && typeof o.catalogOnly !== "boolean") return bad("catalogOnly", co.notBooleanMessage);
+  const catalogOnly = o.catalogOnly === true;
+  if (catalogOnly) {
+    const playback = co.forbiddenCapabilities.find((c) => caps.includes(c));
+    if (playback !== undefined) return bad("catalogOnly", co.forbidsMessage.replace("{name}", playback));
+    if (!co.atLeastOneOf.some((c) => caps.includes(c))) return bad("catalogOnly", co.atLeastOneOfMessage);
+  } else {
+    // Capabilities that play nothing, declared without any other (a subtitle provider, a tracker, or both): neither
+    // `required` nor `atLeastOneOf` applies.
+    const standalone = caps.length > 0 && caps.every((c) => contract.capabilities.standalone.includes(c));
+    const missingRequiredCap = contract.capabilities.required.find((c) => !caps.includes(c));
+    if (!standalone && missingRequiredCap !== undefined) return bad("capabilities", `El plugin debe declarar "${missingRequiredCap}"`);
+    if (!standalone && !contract.capabilities.atLeastOneOf.some((c) => caps.includes(c))) {
+      return bad("capabilities", `El plugin debe declarar "${contract.capabilities.atLeastOneOf.join('" o "')}"`);
+    }
   }
   // A capability that rides on another (scopedSearch on search): refused without it.
   const lacking = Object.entries(contract.capabilities.requires || {}).find(([c, needs]) => caps.includes(c) && !caps.includes(needs));
@@ -262,7 +273,13 @@ export function validateManifest(text, { knownPermissions = contract.permissions
   if (hosts.length === 0 && !(o.settings || []).some((x) => x.type === "url" || (x.type === "list" && Array.isArray(x.fields) && x.fields.some((f) => f.type === "url")))) {
     return bad("hosts", 'El campo "hosts" solo puede estar vacío si el plugin tiene un ajuste de tipo "url"');
   }
-  const out = { ...o, hosts: [...new Set(hosts)], capabilities: caps, permissions: o.permissions || [], settings: o.settings || [], insecureHosts, liveStreamHostsAny, streamHostsAny, fetchHostsAny, discoverable, categories, debug, telemetry, browser, browserPages, section, theme, secrets, secretKeyEncodings };
+  // Judged on what the app honours: below its apiVersion a field is ignored, so it forbids nothing there.
+  if (catalogOnly) {
+    const playback = { streamHosts: streamHostsAny, browser: browser && !browserPages };
+    const field = co.forbiddenFields.find((f) => playback[f] === true);
+    if (field !== undefined) return bad("catalogOnly", co.forbidsMessage.replace("{name}", field));
+  }
+  const out = { ...o, hosts: [...new Set(hosts)], capabilities: caps, permissions: o.permissions || [], settings: o.settings || [], insecureHosts, liveStreamHostsAny, streamHostsAny, fetchHostsAny, discoverable, categories, debug, telemetry, browser, browserPages, section, theme, secrets, secretKeyEncodings, catalogOnly };
   // `signature` only where the app reads it (apiVersion 5+): an ignored one is dropped, as the app drops it.
   if (!signed) delete out.signature;
   return { ok: true, manifest: out };

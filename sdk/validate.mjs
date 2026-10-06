@@ -43,6 +43,8 @@ export const SCOPED_IGNORED = 'Declara "scopedSearch" pero search() no lee query
 export function consentLines(m, { authorFingerprint = null } = {}) {
   const out = [];
   const line = (text, danger = false) => out.push({ text, danger });
+  // "catalogOnly": true (Kino 0.9.54): not a grant, says what the plugin is (PluginConsent / CatalogOnlyText.consentLine).
+  if (m.catalogOnly) line(contract.manifest.catalogOnly.consentLine.es);
   (m.permissions || []).forEach((p) => line(`Permiso: ${p}`));
   if ((m.settings || []).some((s) => s.type === "password")) line("Este plugin usa tu usuario y contraseña");
   if ((m.settings || []).some((s) => s.type === "url")) line("Se conectará a los servidores que escribas en su configuración");
@@ -184,6 +186,22 @@ export function bindingFromGit(dir) {
 }
 
 /**
+ * "catalogOnly": true is additive (Kino 0.9.54): an older Kino ignores the field and applies its own rules, which ask for
+ * `resolve` and for `search` or `home`. Notes only: the plugin is valid, older apps just refuse it (or play its resolve).
+ */
+export function catalogOnlyNotes(m) {
+  if (!m.catalogOnly) return [];
+  const co = contract.manifest.catalogOnly;
+  const notes = [];
+  const older = co.olderApps;
+  const missing = [...contract.capabilities.required.filter((c) => !m.capabilities.includes(c))];
+  if (!contract.capabilities.atLeastOneOf.some((c) => m.capabilities.includes(c))) missing.push(contract.capabilities.atLeastOneOf.join('" o "'));
+  if (missing.length) notes.push(older.refusedNote.replace("{fromApp}", contract.additiveFromApp.catalogOnly).replace("{missing}", missing.join('", "')));
+  else notes.push(older.compatibleNote.replace("{fromApp}", contract.additiveFromApp.catalogOnly));
+  return notes;
+}
+
+/**
  * kino.meta and kino.tmdb exist from Kino 0.9.53 on, with no new apiVersion: a plugin that calls one without checking
  * `typeof kino.<name> === "function"` fails with a TypeError on older Kino. A warning only (contract.additiveFromApp).
  */
@@ -211,6 +229,7 @@ export async function validate(dirArg, { run = null, args = [], config = {}, rep
   const notes = [];
   let authorFingerprint = null;
   if (!m.discoverable) notes.push("No aparecerá en la búsqueda de Kino");
+  for (const note of catalogOnlyNotes(m)) notes.push(note);
   // "debug": true only turns every person's "Modo debug" switch on by default (Kino 0.9.50): the author is told what that means.
   if (m.debug) notes.push(contract.manifest.debug.defaultOnNote);
   if (m.theme && Object.keys(m.theme).length) for (const w of resolvePalette(m.theme).warnings) notes.push(w);
