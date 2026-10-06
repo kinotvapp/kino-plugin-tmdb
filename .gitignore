@@ -1,0 +1,5 @@
+.kino-cookies.json
+.kino-storage.json
+.kino-secrets.json
+sdk/config.json
+node_modules/

@@ -1,0 +1,52 @@
+{
+  "id": "tmdb",
+  "name": "TMDB",
+  "version": "1.0.0",
+  "apiVersion": 7,
+  "entry": "plugin.js",
+  "description": "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato con tu propia llave.",
+  "author": "kinotvapp",
+  "homepage": "https://github.com/kinotvapp/kino-plugin-tmdb",
+  "hosts": ["image.tmdb.org"],
+  "capabilities": ["search", "home", "browse", "episodes", "resolve", "meta"],
+  "categories": ["movies", "series", "utilities"],
+  "discoverable": true,
+  "section": { "label": "TMDB" },
+  "theme": { "accent": "#01B4E4", "onAccent": "#0D253F", "background": "#0D253F", "surface": "#173A5C", "highlight": "#90CEA1" },
+  "settings": [
+    { "key": "llave", "label": "Tu llave de TMDB", "type": "section", "hint": "Este plugin usa tu propia llave de TMDB, que es gratis: ponla en Ajustes ▸ «Tu llave de TMDB», o instala un addon de TMDB de Stremio configurado con tu llave. El plugin nunca la ve. This product uses the TMDB API but is not endorsed or certified by TMDB." },
+    { "key": "estado", "label": "Estado", "type": "status" },
+    { "key": "preferencias", "label": "Idioma y país", "type": "section", "hint": "Por defecto siguen el idioma y el país de tu aparato. El país decide los estrenos en cines y lo que viene pronto." },
+    { "key": "idioma", "label": "Idioma del catálogo", "type": "select", "default": "auto",
+      "options": [
+        { "value": "auto", "label": "El de tu aparato" },
+        { "value": "es-MX", "label": "Español (Latinoamérica)" },
+        { "value": "es-ES", "label": "Español (España)" },
+        { "value": "en-US", "label": "English" }
+      ] },
+    { "key": "pais", "label": "País", "type": "select", "default": "auto",
+      "options": [
+        { "value": "auto", "label": "El de tu aparato" },
+        { "value": "CO", "label": "Colombia" },
+        { "value": "MX", "label": "México" },
+        { "value": "AR", "label": "Argentina" },
+        { "value": "CL", "label": "Chile" },
+        { "value": "PE", "label": "Perú" },
+        { "value": "EC", "label": "Ecuador" },
+        { "value": "VE", "label": "Venezuela" },
+        { "value": "UY", "label": "Uruguay" },
+        { "value": "PY", "label": "Paraguay" },
+        { "value": "BO", "label": "Bolivia" },
+        { "value": "CR", "label": "Costa Rica" },
+        { "value": "GT", "label": "Guatemala" },
+        { "value": "PA", "label": "Panamá" },
+        { "value": "DO", "label": "República Dominicana" },
+        { "value": "PR", "label": "Puerto Rico" },
+        { "value": "ES", "label": "España" },
+        { "value": "US", "label": "Estados Unidos" },
+        { "value": "BR", "label": "Brasil" }
+      ] }
+  ],
+  "color": "#01B4E4",
+  "icon": "icon.png"
+}

@@ -1,0 +1,1655 @@
+{
+ "/configuration": {
+  "images": {
+   "secure_base_url": "https://image.tmdb.org/t/p/"
+  }
+ },
+ "/trending/all/day": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   },
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601,
+    "media_type": "tv"
+   },
+   {
+    "id": 6384,
+    "media_type": "person",
+    "name": "Keanu Reeves",
+    "known_for": []
+   },
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795,
+    "media_type": "movie"
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268,
+    "media_type": "tv"
+   },
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   },
+   {
+    "adult": true,
+    "id": 999001,
+    "title": "Algo para adultos",
+    "original_title": "Adult",
+    "release_date": "2020-01-01",
+    "genre_ids": [],
+    "vote_average": 5,
+    "vote_count": 20000,
+    "poster_path": "/p999001.jpg",
+    "backdrop_path": "/b999001.jpg",
+    "overview": "Sinopsis de Algo para adultos.",
+    "popularity": 0.0999000000000052,
+    "media_type": "movie"
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 7
+ },
+ "/trending/all/week": {
+  "page": 1,
+  "results": [
+   {
+    "adult": true,
+    "id": 999001,
+    "title": "Algo para adultos",
+    "original_title": "Adult",
+    "release_date": "2020-01-01",
+    "genre_ids": [],
+    "vote_average": 5,
+    "vote_count": 20000,
+    "poster_path": "/p999001.jpg",
+    "backdrop_path": "/b999001.jpg",
+    "overview": "Sinopsis de Algo para adultos.",
+    "popularity": 0.0999000000000052,
+    "media_type": "movie"
+   },
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268,
+    "media_type": "tv"
+   },
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795,
+    "media_type": "movie"
+   },
+   {
+    "id": 6384,
+    "media_type": "person",
+    "name": "Keanu Reeves",
+    "known_for": []
+   },
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601,
+    "media_type": "tv"
+   },
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 7
+ },
+ "/movie/popular": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397
+   },
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795
+   },
+   {
+    "adult": false,
+    "id": 155,
+    "title": "Batman: El caballero de la noche",
+    "original_title": "The Dark Knight",
+    "release_date": "2008-07-16",
+    "genre_ids": [
+     18,
+     28,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p155.jpg",
+    "backdrop_path": "/b155.jpg",
+    "overview": "Sinopsis de Batman: El caballero de la noche.",
+    "popularity": 99.9845
+   },
+   {
+    "adult": false,
+    "id": 157336,
+    "title": "Interestelar",
+    "original_title": "Interstellar",
+    "release_date": "2014-11-05",
+    "genre_ids": [
+     12,
+     18,
+     878
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p157336.jpg",
+    "backdrop_path": "/b157336.jpg",
+    "overview": "Sinopsis de Interestelar.",
+    "popularity": 84.2664
+   }
+  ],
+  "total_pages": 3,
+  "total_results": 12
+ },
+ "/movie/popular?language=es-MX&page=2&region=CO": {
+  "page": 2,
+  "results": [
+   {
+    "adult": false,
+    "id": 680,
+    "title": "Tiempos violentos",
+    "original_title": "Pulp Fiction",
+    "release_date": "1994-09-10",
+    "genre_ids": [
+     53,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p680.jpg",
+    "backdrop_path": "/b680.jpg",
+    "overview": "Sinopsis de Tiempos violentos.",
+    "popularity": 99.932
+   },
+   {
+    "adult": false,
+    "id": 13,
+    "title": "Forrest Gump",
+    "original_title": "Forrest Gump",
+    "release_date": "1994-06-23",
+    "genre_ids": [
+     35,
+     18,
+     10749
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p13.jpg",
+    "backdrop_path": "/b13.jpg",
+    "overview": "Sinopsis de Forrest Gump.",
+    "popularity": 99.9987
+   },
+   {
+    "adult": false,
+    "id": 129,
+    "title": "El viaje de Chihiro",
+    "original_title": "千と千尋の神隠し",
+    "release_date": "2001-07-20",
+    "genre_ids": [
+     16,
+     10751,
+     14
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p129.jpg",
+    "backdrop_path": "/b129.jpg",
+    "overview": "Sinopsis de El viaje de Chihiro.",
+    "popularity": 99.9871
+   },
+   {
+    "adult": false,
+    "id": 694,
+    "title": "El resplandor",
+    "original_title": "The Shining",
+    "release_date": "1980-05-23",
+    "genre_ids": [
+     27,
+     53
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p694.jpg",
+    "backdrop_path": "/b694.jpg",
+    "overview": "Sinopsis de El resplandor.",
+    "popularity": 99.9306
+   }
+  ],
+  "total_pages": 3,
+  "total_results": 12
+ },
+ "/movie/popular?language=es-MX&page=3&region=CO": {
+  "page": 3,
+  "results": [
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397
+   },
+   {
+    "adult": false,
+    "id": 694,
+    "title": "El resplandor",
+    "original_title": "The Shining",
+    "release_date": "1980-05-23",
+    "genre_ids": [
+     27,
+     53
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p694.jpg",
+    "backdrop_path": "/b694.jpg",
+    "overview": "Sinopsis de El resplandor.",
+    "popularity": 99.9306
+   }
+  ],
+  "total_pages": 3,
+  "total_results": 6
+ },
+ "/tv/popular": {
+  "page": 1,
+  "results": [
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601
+   },
+   {
+    "id": 1396,
+    "name": "Breaking Bad",
+    "original_name": "Breaking Bad",
+    "first_air_date": "2008-01-20",
+    "genre_ids": [
+     18,
+     80
+    ],
+    "vote_average": 8.9,
+    "vote_count": 15000,
+    "poster_path": "/p1396.jpg",
+    "backdrop_path": "/b1396.jpg",
+    "overview": "Sinopsis de Breaking Bad.",
+    "popularity": 89.8604
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268
+   },
+   {
+    "id": 1429,
+    "name": "Ataque a los titanes",
+    "original_name": "進撃の巨人",
+    "first_air_date": "2013-04-07",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p1429.jpg",
+    "backdrop_path": "/b1429.jpg",
+    "overview": "Sinopsis de Ataque a los titanes.",
+    "popularity": 89.8571
+   },
+   {
+    "id": 94605,
+    "name": "Arcane",
+    "original_name": "Arcane",
+    "first_air_date": "2021-11-06",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p94605.jpg",
+    "backdrop_path": "/b94605.jpg",
+    "overview": "Sinopsis de Arcane.",
+    "popularity": 80.5395
+   },
+   {
+    "id": 60625,
+    "name": "Rick y Morty",
+    "original_name": "Rick and Morty",
+    "first_air_date": "2013-12-02",
+    "genre_ids": [
+     16,
+     35,
+     10765
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p60625.jpg",
+    "backdrop_path": "/b60625.jpg",
+    "overview": "Sinopsis de Rick y Morty.",
+    "popularity": 83.9375
+   }
+  ],
+  "total_pages": 500,
+  "total_results": 3000
+ },
+ "/movie/top_rated": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 694,
+    "title": "El resplandor",
+    "original_title": "The Shining",
+    "release_date": "1980-05-23",
+    "genre_ids": [
+     27,
+     53
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p694.jpg",
+    "backdrop_path": "/b694.jpg",
+    "overview": "Sinopsis de El resplandor.",
+    "popularity": 99.9306
+   },
+   {
+    "adult": false,
+    "id": 129,
+    "title": "El viaje de Chihiro",
+    "original_title": "千と千尋の神隠し",
+    "release_date": "2001-07-20",
+    "genre_ids": [
+     16,
+     10751,
+     14
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p129.jpg",
+    "backdrop_path": "/b129.jpg",
+    "overview": "Sinopsis de El viaje de Chihiro.",
+    "popularity": 99.9871
+   },
+   {
+    "adult": false,
+    "id": 13,
+    "title": "Forrest Gump",
+    "original_title": "Forrest Gump",
+    "release_date": "1994-06-23",
+    "genre_ids": [
+     35,
+     18,
+     10749
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p13.jpg",
+    "backdrop_path": "/b13.jpg",
+    "overview": "Sinopsis de Forrest Gump.",
+    "popularity": 99.9987
+   },
+   {
+    "adult": false,
+    "id": 680,
+    "title": "Tiempos violentos",
+    "original_title": "Pulp Fiction",
+    "release_date": "1994-09-10",
+    "genre_ids": [
+     53,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p680.jpg",
+    "backdrop_path": "/b680.jpg",
+    "overview": "Sinopsis de Tiempos violentos.",
+    "popularity": 99.932
+   },
+   {
+    "adult": false,
+    "id": 157336,
+    "title": "Interestelar",
+    "original_title": "Interstellar",
+    "release_date": "2014-11-05",
+    "genre_ids": [
+     12,
+     18,
+     878
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p157336.jpg",
+    "backdrop_path": "/b157336.jpg",
+    "overview": "Sinopsis de Interestelar.",
+    "popularity": 84.2664
+   },
+   {
+    "adult": false,
+    "id": 155,
+    "title": "Batman: El caballero de la noche",
+    "original_title": "The Dark Knight",
+    "release_date": "2008-07-16",
+    "genre_ids": [
+     18,
+     28,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p155.jpg",
+    "backdrop_path": "/b155.jpg",
+    "overview": "Sinopsis de Batman: El caballero de la noche.",
+    "popularity": 99.9845
+   },
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795
+   },
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 8
+ },
+ "/tv/top_rated": {
+  "page": 1,
+  "results": [
+   {
+    "id": 60625,
+    "name": "Rick y Morty",
+    "original_name": "Rick and Morty",
+    "first_air_date": "2013-12-02",
+    "genre_ids": [
+     16,
+     35,
+     10765
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p60625.jpg",
+    "backdrop_path": "/b60625.jpg",
+    "overview": "Sinopsis de Rick y Morty.",
+    "popularity": 83.9375
+   },
+   {
+    "id": 94605,
+    "name": "Arcane",
+    "original_name": "Arcane",
+    "first_air_date": "2021-11-06",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p94605.jpg",
+    "backdrop_path": "/b94605.jpg",
+    "overview": "Sinopsis de Arcane.",
+    "popularity": 80.5395
+   },
+   {
+    "id": 1429,
+    "name": "Ataque a los titanes",
+    "original_name": "進撃の巨人",
+    "first_air_date": "2013-04-07",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p1429.jpg",
+    "backdrop_path": "/b1429.jpg",
+    "overview": "Sinopsis de Ataque a los titanes.",
+    "popularity": 89.8571
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268
+   },
+   {
+    "id": 1396,
+    "name": "Breaking Bad",
+    "original_name": "Breaking Bad",
+    "first_air_date": "2008-01-20",
+    "genre_ids": [
+     18,
+     80
+    ],
+    "vote_average": 8.9,
+    "vote_count": 15000,
+    "poster_path": "/p1396.jpg",
+    "backdrop_path": "/b1396.jpg",
+    "overview": "Sinopsis de Breaking Bad.",
+    "popularity": 89.8604
+   },
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 6
+ },
+ "/movie/now_playing": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 155,
+    "title": "Batman: El caballero de la noche",
+    "original_title": "The Dark Knight",
+    "release_date": "2008-07-16",
+    "genre_ids": [
+     18,
+     28,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p155.jpg",
+    "backdrop_path": "/b155.jpg",
+    "overview": "Sinopsis de Batman: El caballero de la noche.",
+    "popularity": 99.9845
+   },
+   {
+    "adult": false,
+    "id": 157336,
+    "title": "Interestelar",
+    "original_title": "Interstellar",
+    "release_date": "2014-11-05",
+    "genre_ids": [
+     12,
+     18,
+     878
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p157336.jpg",
+    "backdrop_path": "/b157336.jpg",
+    "overview": "Sinopsis de Interestelar.",
+    "popularity": 84.2664
+   },
+   {
+    "adult": false,
+    "id": 680,
+    "title": "Tiempos violentos",
+    "original_title": "Pulp Fiction",
+    "release_date": "1994-09-10",
+    "genre_ids": [
+     53,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p680.jpg",
+    "backdrop_path": "/b680.jpg",
+    "overview": "Sinopsis de Tiempos violentos.",
+    "popularity": 99.932
+   },
+   {
+    "adult": false,
+    "id": 13,
+    "title": "Forrest Gump",
+    "original_title": "Forrest Gump",
+    "release_date": "1994-06-23",
+    "genre_ids": [
+     35,
+     18,
+     10749
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p13.jpg",
+    "backdrop_path": "/b13.jpg",
+    "overview": "Sinopsis de Forrest Gump.",
+    "popularity": 99.9987
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 4
+ },
+ "/tv/on_the_air": {
+  "page": 1,
+  "results": [
+   {
+    "id": 1396,
+    "name": "Breaking Bad",
+    "original_name": "Breaking Bad",
+    "first_air_date": "2008-01-20",
+    "genre_ids": [
+     18,
+     80
+    ],
+    "vote_average": 8.9,
+    "vote_count": 15000,
+    "poster_path": "/p1396.jpg",
+    "backdrop_path": "/b1396.jpg",
+    "overview": "Sinopsis de Breaking Bad.",
+    "popularity": 89.8604
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268
+   },
+   {
+    "id": 1429,
+    "name": "Ataque a los titanes",
+    "original_name": "進撃の巨人",
+    "first_air_date": "2013-04-07",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p1429.jpg",
+    "backdrop_path": "/b1429.jpg",
+    "overview": "Sinopsis de Ataque a los titanes.",
+    "popularity": 89.8571
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 3
+ },
+ "/tv/airing_today": {
+  "page": 1,
+  "results": [
+   {
+    "id": 1429,
+    "name": "Ataque a los titanes",
+    "original_name": "進撃の巨人",
+    "first_air_date": "2013-04-07",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p1429.jpg",
+    "backdrop_path": "/b1429.jpg",
+    "overview": "Sinopsis de Ataque a los titanes.",
+    "popularity": 89.8571
+   },
+   {
+    "id": 94605,
+    "name": "Arcane",
+    "original_name": "Arcane",
+    "first_air_date": "2021-11-06",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p94605.jpg",
+    "backdrop_path": "/b94605.jpg",
+    "overview": "Sinopsis de Arcane.",
+    "popularity": 80.5395
+   },
+   {
+    "id": 60625,
+    "name": "Rick y Morty",
+    "original_name": "Rick and Morty",
+    "first_air_date": "2013-12-02",
+    "genre_ids": [
+     16,
+     35,
+     10765
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p60625.jpg",
+    "backdrop_path": "/b60625.jpg",
+    "overview": "Sinopsis de Rick y Morty.",
+    "popularity": 83.9375
+   }
+  ],
+  "total_pages": 1,
+  "total_results": 3
+ },
+ "/discover/movie": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795
+   },
+   {
+    "adult": false,
+    "id": 155,
+    "title": "Batman: El caballero de la noche",
+    "original_title": "The Dark Knight",
+    "release_date": "2008-07-16",
+    "genre_ids": [
+     18,
+     28,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p155.jpg",
+    "backdrop_path": "/b155.jpg",
+    "overview": "Sinopsis de Batman: El caballero de la noche.",
+    "popularity": 99.9845
+   },
+   {
+    "adult": false,
+    "id": 157336,
+    "title": "Interestelar",
+    "original_title": "Interstellar",
+    "release_date": "2014-11-05",
+    "genre_ids": [
+     12,
+     18,
+     878
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p157336.jpg",
+    "backdrop_path": "/b157336.jpg",
+    "overview": "Sinopsis de Interestelar.",
+    "popularity": 84.2664
+   },
+   {
+    "adult": false,
+    "id": 680,
+    "title": "Tiempos violentos",
+    "original_title": "Pulp Fiction",
+    "release_date": "1994-09-10",
+    "genre_ids": [
+     53,
+     80
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p680.jpg",
+    "backdrop_path": "/b680.jpg",
+    "overview": "Sinopsis de Tiempos violentos.",
+    "popularity": 99.932
+   },
+   {
+    "adult": false,
+    "id": 13,
+    "title": "Forrest Gump",
+    "original_title": "Forrest Gump",
+    "release_date": "1994-06-23",
+    "genre_ids": [
+     35,
+     18,
+     10749
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p13.jpg",
+    "backdrop_path": "/b13.jpg",
+    "overview": "Sinopsis de Forrest Gump.",
+    "popularity": 99.9987
+   },
+   {
+    "adult": false,
+    "id": 129,
+    "title": "El viaje de Chihiro",
+    "original_title": "千と千尋の神隠し",
+    "release_date": "2001-07-20",
+    "genre_ids": [
+     16,
+     10751,
+     14
+    ],
+    "vote_average": 8.5,
+    "vote_count": 20000,
+    "poster_path": "/p129.jpg",
+    "backdrop_path": "/b129.jpg",
+    "overview": "Sinopsis de El viaje de Chihiro.",
+    "popularity": 99.9871
+   }
+  ],
+  "total_pages": 10,
+  "total_results": 60
+ },
+ "/discover/tv": {
+  "page": 1,
+  "results": [
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601
+   },
+   {
+    "id": 1396,
+    "name": "Breaking Bad",
+    "original_name": "Breaking Bad",
+    "first_air_date": "2008-01-20",
+    "genre_ids": [
+     18,
+     80
+    ],
+    "vote_average": 8.9,
+    "vote_count": 15000,
+    "poster_path": "/p1396.jpg",
+    "backdrop_path": "/b1396.jpg",
+    "overview": "Sinopsis de Breaking Bad.",
+    "popularity": 89.8604
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268
+   },
+   {
+    "id": 1429,
+    "name": "Ataque a los titanes",
+    "original_name": "進撃の巨人",
+    "first_air_date": "2013-04-07",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p1429.jpg",
+    "backdrop_path": "/b1429.jpg",
+    "overview": "Sinopsis de Ataque a los titanes.",
+    "popularity": 89.8571
+   },
+   {
+    "id": 94605,
+    "name": "Arcane",
+    "original_name": "Arcane",
+    "first_air_date": "2021-11-06",
+    "genre_ids": [
+     16,
+     10765,
+     10759
+    ],
+    "vote_average": 8.7,
+    "vote_count": 15000,
+    "poster_path": "/p94605.jpg",
+    "backdrop_path": "/b94605.jpg",
+    "overview": "Sinopsis de Arcane.",
+    "popularity": 80.5395
+   }
+  ],
+  "total_pages": 10,
+  "total_results": 50
+ },
+ "/search/multi": {
+  "page": 1,
+  "results": [
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   },
+   {
+    "id": 1399,
+    "name": "Juego de tronos",
+    "original_name": "Game of Thrones",
+    "first_air_date": "2011-04-17",
+    "genre_ids": [
+     10765,
+     18,
+     10759
+    ],
+    "vote_average": 8.5,
+    "vote_count": 15000,
+    "poster_path": "/p1399.jpg",
+    "backdrop_path": "/b1399.jpg",
+    "overview": "Sinopsis de Juego de tronos.",
+    "popularity": 89.8601,
+    "media_type": "tv"
+   },
+   {
+    "id": 6384,
+    "media_type": "person",
+    "name": "Keanu Reeves",
+    "known_for": []
+   },
+   {
+    "adult": false,
+    "id": 27205,
+    "title": "El origen",
+    "original_title": "Inception",
+    "release_date": "2010-07-15",
+    "genre_ids": [
+     28,
+     878,
+     12
+    ],
+    "vote_average": 8.4,
+    "vote_count": 20000,
+    "poster_path": "/p27205.jpg",
+    "backdrop_path": "/b27205.jpg",
+    "overview": "Sinopsis de El origen.",
+    "popularity": 97.2795,
+    "media_type": "movie"
+   },
+   {
+    "id": 66732,
+    "name": "Stranger Things",
+    "original_name": "Stranger Things",
+    "first_air_date": "2016-07-15",
+    "genre_ids": [
+     18,
+     10765,
+     9648
+    ],
+    "vote_average": 8.6,
+    "vote_count": 15000,
+    "poster_path": "/p66732.jpg",
+    "backdrop_path": "/b66732.jpg",
+    "overview": "Sinopsis de Stranger Things.",
+    "popularity": 83.3268,
+    "media_type": "tv"
+   },
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 99.9397,
+    "media_type": "movie"
+   },
+   {
+    "adult": true,
+    "id": 999001,
+    "title": "Algo para adultos",
+    "original_title": "Adult",
+    "release_date": "2020-01-01",
+    "genre_ids": [],
+    "vote_average": 5,
+    "vote_count": 20000,
+    "poster_path": "/p999001.jpg",
+    "backdrop_path": "/b999001.jpg",
+    "overview": "Sinopsis de Algo para adultos.",
+    "popularity": 0.0999000000000052,
+    "media_type": "movie"
+   }
+  ],
+  "total_pages": 2,
+  "total_results": 14
+ },
+ "/person/6384/combined_credits": {
+  "cast": [
+   {
+    "adult": false,
+    "id": 603,
+    "title": "Matrix",
+    "original_title": "The Matrix",
+    "release_date": "1999-03-31",
+    "genre_ids": [
+     28,
+     878
+    ],
+    "vote_average": 8.2,
+    "vote_count": 20000,
+    "poster_path": "/p603.jpg",
+    "backdrop_path": "/b603.jpg",
+    "overview": "Sinopsis de Matrix.",
+    "popularity": 80,
+    "media_type": "movie"
+   },
+   {
+    "adult": false,
+    "id": 1880,
+    "title": "John Wick",
+    "original_title": "John Wick",
+    "release_date": "2014-10-22",
+    "genre_ids": [
+     28,
+     53
+    ],
+    "vote_average": 7.4,
+    "vote_count": 20000,
+    "poster_path": "/p1880.jpg",
+    "backdrop_path": "/b1880.jpg",
+    "overview": "Sinopsis de John Wick.",
+    "popularity": 95,
+    "media_type": "movie"
+   }
+  ],
+  "crew": [
+   {
+    "adult": false,
+    "id": 77777,
+    "title": "Man of Tai Chi",
+    "original_title": "Man of Tai Chi",
+    "release_date": "2013-07-05",
+    "genre_ids": [
+     28
+    ],
+    "vote_average": 6,
+    "vote_count": 20000,
+    "poster_path": "/p77777.jpg",
+    "backdrop_path": "/b77777.jpg",
+    "overview": "Sinopsis de Man of Tai Chi.",
+    "popularity": 10,
+    "media_type": "movie",
+    "job": "Director"
+   }
+  ]
+ },
+ "/tv/1399": {
+  "id": 1399,
+  "name": "Juego de tronos",
+  "original_name": "Game of Thrones",
+  "first_air_date": "2011-04-17",
+  "genre_ids": [
+   10765,
+   18,
+   10759
+  ],
+  "vote_average": 8.5,
+  "vote_count": 15000,
+  "poster_path": "/p1399.jpg",
+  "backdrop_path": "/b1399.jpg",
+  "overview": "Sinopsis de Juego de tronos.",
+  "popularity": 89.8601,
+  "genres": [
+   {
+    "id": 10765,
+    "name": "Sci-Fi & Fantasy"
+   },
+   {
+    "id": 18,
+    "name": "Drama"
+   }
+  ],
+  "number_of_seasons": 2,
+  "seasons": [
+   {
+    "season_number": 0,
+    "episode_count": 3,
+    "name": "Especiales"
+   },
+   {
+    "season_number": 1,
+    "episode_count": 3,
+    "name": "Temporada 1"
+   },
+   {
+    "season_number": 2,
+    "episode_count": 2,
+    "name": "Temporada 2"
+   }
+  ],
+  "external_ids": {
+   "imdb_id": "tt0944947",
+   "tvdb_id": 121361
+  },
+  "credits": {
+   "cast": [
+    {
+     "name": "Emilia Clarke",
+     "character": "Daenerys Targaryen",
+     "profile_path": "/ec.jpg"
+    },
+    {
+     "name": "Kit Harington",
+     "character": "Jon Snow",
+     "profile_path": null
+    }
+   ]
+  },
+  "images": {
+   "logos": [
+    {
+     "file_path": "/logo-en.png",
+     "iso_639_1": "en",
+     "vote_average": 5
+    },
+    {
+     "file_path": "/logo-es.png",
+     "iso_639_1": "es",
+     "vote_average": 4
+    },
+    {
+     "file_path": "/logo.svg",
+     "iso_639_1": "es",
+     "vote_average": 9
+    }
+   ]
+  },
+  "translations": {
+   "translations": [
+    {
+     "iso_639_1": "en",
+     "iso_3166_1": "US",
+     "data": {
+      "name": "Game of Thrones",
+      "overview": "Seven noble families fight."
+     }
+    }
+   ]
+  },
+  "season/1": {
+   "season_number": 1,
+   "name": "Temporada 1",
+   "episodes": [
+    {
+     "season_number": 1,
+     "episode_number": 1,
+     "name": "Capítulo 1x1",
+     "overview": "Pasa algo en el 1.",
+     "still_path": "/s1399-1-1.jpg",
+     "air_date": "2011-01-10",
+     "runtime": 55,
+     "crew": [],
+     "guest_stars": []
+    },
+    {
+     "season_number": 1,
+     "episode_number": 2,
+     "name": "Capítulo 1x2",
+     "overview": "Pasa algo en el 2.",
+     "still_path": "/s1399-1-2.jpg",
+     "air_date": "2011-01-11",
+     "runtime": 56,
+     "crew": [],
+     "guest_stars": []
+    },
+    {
+     "season_number": 1,
+     "episode_number": 3,
+     "name": "Capítulo 1x3",
+     "overview": "Pasa algo en el 3.",
+     "still_path": "/s1399-1-3.jpg",
+     "air_date": "2011-01-12",
+     "runtime": 57,
+     "crew": [],
+     "guest_stars": []
+    }
+   ]
+  },
+  "season/2": {
+   "season_number": 2,
+   "name": "Temporada 2",
+   "episodes": [
+    {
+     "season_number": 2,
+     "episode_number": 1,
+     "name": "Capítulo 2x1",
+     "overview": "Pasa algo en el 1.",
+     "still_path": "/s1399-2-1.jpg",
+     "air_date": "2011-02-10",
+     "runtime": 55,
+     "crew": [],
+     "guest_stars": []
+    },
+    {
+     "season_number": 2,
+     "episode_number": 2,
+     "name": "Capítulo 2x2",
+     "overview": "Pasa algo en el 2.",
+     "still_path": "/s1399-2-2.jpg",
+     "air_date": "2011-02-11",
+     "runtime": 56,
+     "crew": [],
+     "guest_stars": []
+    }
+   ]
+  }
+ },
+ "/movie/603": {
+  "adult": false,
+  "id": 603,
+  "title": "Matrix",
+  "original_title": "The Matrix",
+  "release_date": "1999-03-31",
+  "genre_ids": [
+   28,
+   878
+  ],
+  "vote_average": 8.2,
+  "vote_count": 20000,
+  "poster_path": "/p603.jpg",
+  "backdrop_path": "/b603.jpg",
+  "overview": "",
+  "popularity": 99.9397,
+  "runtime": 136,
+  "imdb_id": "tt0133093",
+  "genres": [
+   {
+    "id": 28,
+    "name": "Acción"
+   },
+   {
+    "id": 878,
+    "name": "Ciencia ficción"
+   }
+  ],
+  "external_ids": {
+   "imdb_id": "tt0133093"
+  },
+  "credits": {
+   "cast": [
+    {
+     "name": "Keanu Reeves",
+     "character": "Neo",
+     "profile_path": "/kr.jpg"
+    },
+    {
+     "name": "Keanu Reeves",
+     "character": "Neo (repeat)"
+    },
+    {
+     "name": "Carrie-Anne Moss",
+     "character": "Trinity",
+     "profile_path": "/cam.jpg"
+    }
+   ]
+  },
+  "images": {
+   "logos": [
+    {
+     "file_path": "/matrix-en.png",
+     "iso_639_1": "en",
+     "vote_average": 5
+    }
+   ]
+  },
+  "translations": {
+   "translations": [
+    {
+     "iso_639_1": "en",
+     "iso_3166_1": "US",
+     "data": {
+      "title": "The Matrix",
+      "overview": "A hacker learns the truth."
+     }
+    }
+   ]
+  }
+ },
+ "/tv/1396": {
+  "id": 1396,
+  "name": "Breaking Bad",
+  "original_name": "Breaking Bad",
+  "first_air_date": "2008-01-20",
+  "genre_ids": [
+   18,
+   80
+  ],
+  "vote_average": 8.9,
+  "vote_count": 15000,
+  "poster_path": "/p1396.jpg",
+  "backdrop_path": "/b1396.jpg",
+  "overview": "Sinopsis de Breaking Bad.",
+  "popularity": 89.8604,
+  "genres": [
+   {
+    "id": 18,
+    "name": "Drama"
+   }
+  ],
+  "seasons": []
+ },
+ "/find/tt0133093": {
+  "movie_results": [
+   {
+    "id": 603,
+    "title": "Matrix"
+   }
+  ],
+  "tv_results": []
+ },
+ "/find/tt0944947": {
+  "movie_results": [],
+  "tv_results": [
+   {
+    "id": 1399,
+    "name": "Juego de tronos"
+   }
+  ]
+ }
+}
