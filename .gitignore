@@ -3,3 +3,5 @@
 .kino-secrets.json
 sdk/config.json
 node_modules/
+.kino-shared.json
+.kino-notices.json

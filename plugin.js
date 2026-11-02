@@ -710,3 +710,97 @@ export async function settingsStatus() {
     return { estado: T.down };
   }
 }
+
+// ---------- the "movies" door: TMDB movie records for other plugins (Kino 0.9.81, plugin protocol) ----------
+//
+// Declared in kino-plugin.json under enhancements["20"].provides, so a Kino older than 0.9.81 ignores it and never calls
+// these. A consumer plugin calls them through kino.plugins.call; Kino validates the argument against the door's "in" and
+// keeps only the declared Movie fields of the answer. Every failure is an Error whose message is a short code (Kino tells
+// the consumer provider_failed). Never an adult title: include_adult=false on every list, and adult rows are dropped.
+
+const DOOR_PAGES = 10;     // random picks one of the first discover pages (most popular first)
+const DOOR_MAX_SEEN = 200; // ids a trending cursor remembers
+
+function doorError(e) {
+  const code = e && typeof e.code === "string" && /^[a-z_]{1,32}$/.test(e.code) ? e.code : "unavailable";
+  return new Error(code);
+}
+
+/** One kino.tmdb request for the door, in the person's catalog language, no retry (Kino limits the door's rate itself). */
+async function doorAsk(path, params) {
+  await null;
+  if (typeof kino.tmdb !== "function") throw new Error("unavailable");
+  try {
+    return await kino.tmdb(path, { language: language(), ...params });
+  } catch (e) {
+    throw doorError(e);
+  }
+}
+
+const releaseYear = (row) => {
+  const y = yearOf(row && row.release_date);
+  return y ? Number(y) : null;
+};
+
+/** A TMDB movie row as the door's Movie, or null for an adult row or one without an id, a title or a release year. */
+function toMovie(row) {
+  if (!row || typeof row !== "object" || row.adult === true || !validId(row.id)) return null;
+  const title = text(row.title) || text(row.original_title);
+  const year = releaseYear(row);
+  if (!title || year === null) return null;
+  const movie = { id: row.id, title: title.slice(0, 200), year };
+  const crew = row.credits && Array.isArray(row.credits.crew) ? row.credits.crew : [];
+  const director = crew.find((c) => c && c.job === "Director" && text(c.name));
+  if (director) movie.director = text(director.name).slice(0, 200);
+  if (text(row.overview)) movie.overview = text(row.overview).slice(0, 2000);
+  const poster = img(SIZE.poster, row.poster_path);
+  if (poster) movie.posterUrl = poster;
+  return movie;
+}
+
+const moviesOf = (body) => (body && Array.isArray(body.results) ? body.results : []).map(toMovie).filter(Boolean);
+
+/** One request: the movie with its credits (for the director). */
+async function movieById(id) {
+  if (!validId(id)) throw new Error("not_found");
+  const movie = toMovie(await doorAsk(`/movie/${id}`, { append_to_response: "credits" }));
+  if (!movie) throw new Error("not_found");
+  return movie;
+}
+
+/** The rows of one discover page that could become a Movie: not adult, with an id and a release year. */
+async function discoverPool(params) {
+  const body = await doorAsk("/discover/movie", params);
+  return (body && Array.isArray(body.results) ? body.results : []).filter((r) => r && r.adult !== true && validId(r.id) && releaseYear(r) !== null);
+}
+
+export async function proto_movies_byId(arg) {
+  return movieById(arg && arg.id);
+}
+
+/** A discover page picked at random inside the years, one movie from it, then its full record: two requests. */
+export async function proto_movies_random(arg) {
+  const { fromYear, toYear } = arg || {};
+  const params = { include_adult: false, include_video: false, sort_by: "popularity.desc", "vote_count.gte": 100 };
+  if (Number.isInteger(fromYear)) params["primary_release_date.gte"] = `${fromYear}-01-01`;
+  if (Number.isInteger(toYear)) params["primary_release_date.lte"] = `${toYear}-12-31`;
+  const page = 1 + Math.floor(Math.random() * DOOR_PAGES);
+  let pool = await discoverPool({ ...params, page });
+  if (!pool.length && page > 1) pool = await discoverPool({ ...params, page: 1 });
+  if (!pool.length) throw new Error("not_found");
+  return movieById(pool[Math.floor(Math.random() * pool.length)].id);
+}
+
+export async function proto_movies_search(arg) {
+  const q = text(arg && arg.q).slice(0, 200);
+  if (!q) return [];
+  return moviesOf(await doorAsk("/search/movie", { query: q, include_adult: false }));
+}
+
+/** This week's trending movies the cursor (the ids already delivered) has not seen; the cursor grows, bounded. */
+export async function proto_movies_trending(cursor) {
+  const seen = Array.isArray(cursor) ? cursor.filter(validId) : [];
+  const known = new Set(seen);
+  const fresh = moviesOf(await doorAsk("/trending/movie/week", { include_adult: false })).filter((m) => !known.has(m.id));
+  return { items: fresh, cursor: seen.concat(fresh.map((m) => m.id)).slice(-DOOR_MAX_SEEN) };
+}

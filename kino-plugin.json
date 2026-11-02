@@ -1,7 +1,7 @@
 {
   "id": "tmdb",
   "name": "TMDB",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "apiVersion": 7,
   "entry": "plugin.js",
   "description": "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.",
@@ -49,5 +49,25 @@
       ] }
   ],
   "color": "#01B4E4",
-  "icon": "icon.png"
+  "icon": "icon.png",
+  "enhancements": {
+    "20": {
+      "provides": {
+        "movies": {
+          "summary": "Movie records from TMDB",
+          "calls": {
+            "byId": { "in": { "id": "number" }, "out": "Movie" },
+            "random": { "in": { "fromYear": "number?", "toYear": "number?" }, "out": "Movie" },
+            "search": { "in": { "q": "string" }, "out": "Movie[]" }
+          },
+          "streams": {
+            "trending": { "out": "Movie", "everySeconds": 60 }
+          },
+          "types": {
+            "Movie": { "id": "number", "title": "string", "year": "number", "director": "string?", "overview": "string?", "posterUrl": "string?" }
+          }
+        }
+      }
+    }
+  }
 }

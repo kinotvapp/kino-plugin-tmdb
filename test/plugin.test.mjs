@@ -79,7 +79,7 @@ test("the manifest passes the kit: id, name, apiVersion 7, the image host, no re
 });
 
 test("the manifest no longer asks for the person's key: Kino's connection first, the person's key only as a backup", () => {
-  assert.equal(manifest.version, "1.2.0");
+  assert.equal(manifest.version, "1.3.0");
   assert.equal(manifest.description, "Catálogo e información de películas y series de TMDB para Kino, directo desde tu aparato.");
   const hint = manifest.settings[0].hint;
   assert.match(hint, /^Kino pone la conexión con TMDB/);

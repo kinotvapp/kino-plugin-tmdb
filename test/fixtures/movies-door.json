@@ -1,0 +1,26 @@
+{
+  "/trending/movie/week": {
+    "page": 1,
+    "results": [
+      { "id": 603, "title": "Matrix", "release_date": "1999-03-30", "poster_path": "/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg", "overview": "Un experto en computación descubre que su mundo es una simulación.", "adult": false },
+      { "id": 999, "title": "Adult row", "release_date": "2010-01-01", "adult": true }
+    ]
+  },
+  "/discover/movie": {
+    "page": 1,
+    "results": [
+      { "id": 603, "title": "Matrix", "release_date": "1999-03-30", "adult": false }
+    ]
+  },
+  "/movie/603": {
+    "id": 603,
+    "title": "Matrix",
+    "release_date": "1999-03-30",
+    "adult": false,
+    "poster_path": "/hEpWvX6Bp79eLxY1kX5ZZJcme5U.jpg",
+    "credits": { "crew": [{ "name": "Lana Wachowski", "job": "Director" }] }
+  },
+  "/search/movie": {
+    "results": [{ "id": 603, "title": "Matrix", "release_date": "1999-03-30", "adult": false }]
+  }
+}

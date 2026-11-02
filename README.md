@@ -28,6 +28,39 @@ aparato.
 El idioma sigue el de tu aparato (español de España, español latinoamericano o inglés) y el país decide los
 estrenos en cines; los dos se pueden cambiar en la pestaña TMDB de Ajustes. Nunca muestra contenido para adultos.
 
+## Datos de películas para otros plugins (la puerta `movies`, Kino 0.9.81)
+
+Desde Kino 0.9.81 los plugins pueden usarse entre sí (el protocolo de plugins: `provides` / `consumes`). TMDB abre la
+puerta **`movies`**, así que otro plugin (un juego de trivia de cine, por ejemplo) puede pedirle películas sin tener su
+propia conexión con TMDB. Kino es el único intermediario: revisa lo que entra y lo que sale y limita cuántas veces se
+pregunta.
+
+| Qué | Entra | Sale |
+| --- | --- | --- |
+| `byId` (llamada) | `{ id: number }` (el id de TMDB) | `Movie` |
+| `random` (llamada) | `{ fromYear?: number, toYear?: number }` | `Movie`: una película popular al azar entre esos años |
+| `search` (llamada) | `{ q: string }` | `Movie[]` |
+| `trending` (stream, cada 60 s) | — | `Movie`: solo las tendencias de la semana que aún no había entregado |
+
+`Movie` es `{ id: number, title: string, year: number, director?: string, overview?: string, posterUrl?: string }`, en el
+idioma del catálogo que eligió la persona. Nunca entrega títulos para adultos. Si TMDB falla, el plugin que llamó recibe
+`provider_failed`.
+
+Desde el otro plugin (English, as the protocol docs):
+
+```json
+"consumes": { "tmdb": { "repo": "kinotvapp/kino-plugin-tmdb", "door": "movies", "calls": ["random", "byId", "search"], "streams": ["trending"] } },
+"recommends": ["kinotvapp/kino-plugin-tmdb"]
+```
+
+```js
+const movie = await kino.plugins.call("tmdb", "random", { fromYear: 1990 });
+```
+
+**Para quien ya usa TMDB no cambia nada**: el catálogo, la búsqueda, el Inicio y la información de títulos funcionan
+igual. La puerta va en `"enhancements": { "20": { "provides": … } }` del manifiesto, con `apiVersion` 7: un Kino anterior a
+0.9.81 la ignora sin decir nada y sigue instalando y actualizando el plugin como siempre.
+
 ## La conexión con TMDB
 
 No necesitas hacer nada: el plugin funciona apenas lo instalas.
@@ -65,9 +98,12 @@ necesita una versión más nueva de Kino»); en 0.9.51 y 0.9.52 se instala, pero
   `kino.fetch`, y declara `image.tmdb.org` como único host.
 - `"catalogOnly": true` (Kino 0.9.54) dice que es un catálogo. `resolve` sigue declarado y exportado solo para Kino
   0.9.53, que ignora ese campo y lo exige; Kino 0.9.54 y posteriores nunca lo llaman.
-- `sdk/` es el kit de Kino para Node (`run.mjs`, `validate.mjs`), con `contract.json` y `kino.d.ts` al lado.
+- La puerta `movies` son las exportaciones `proto_movies_byId`, `proto_movies_random`, `proto_movies_search` y
+  `proto_movies_trending(cursor)` al final de `plugin.js` (el cursor de `trending` es la lista, de hasta 200, de ids ya
+  entregados).
+- `sdk/` es el kit de Kino para Node (`run.mjs`, `validate.mjs`, `protocol.mjs`), con `contract.json` y `kino.d.ts` al lado.
 - Pruebas, sin red ni llave (las respuestas de TMDB están en `test/fixtures/tmdb.json`, escritas a mano por
-  `node test/make-fixtures.mjs`):
+  `node test/make-fixtures.mjs`, y las de la puerta `movies` en `test/fixtures/movies-door.json`):
 
   ```sh
   node --test test/*.test.mjs
