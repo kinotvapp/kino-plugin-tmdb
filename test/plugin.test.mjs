@@ -168,7 +168,9 @@ test("no key: home and search throw Kino's own no_tmdb_key after a single call; 
   const { calls } = setup({ tmdb: () => { throw noTmdbKeyError("es-CO"); } });
   const e = await rejects(plugin.home());
   assert.equal(e.code, "no_tmdb_key");
-  assert.match(e.userMessage, /Agrega tu llave de TMDB en Ajustes, o instala un addon de TMDB de Stremio/);
+  // Kino's own sentence, passed through untouched (its wording is Kino's and changes between versions).
+  assert.equal(e.userMessage, noTmdbKeyError("es-CO").userMessage);
+  assert.match(e.userMessage, /Agrega tu llave de TMDB en Ajustes/);
   assert.equal(calls.length, 1, "a person without a key costs one call, not eighteen");
   assert.equal((await rejects(plugin.search({ q: "matrix", type: "any", cursor: null }))).code, "no_tmdb_key");
   assert.equal((await rejects(plugin.browse("l:pop-tv", null))).code, "no_tmdb_key");
